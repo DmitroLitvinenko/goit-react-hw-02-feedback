@@ -10,13 +10,25 @@ export class Feedback extends Component {
     bad: 0,
   };
 
+  onAddFeedback = feedback => {
+    this.setState(prevState => ({
+      [feedback]: prevState[feedback] + 1,
+    }));
+  };
+
   render() {
     return (
       <Container>
         <h1>Please leave feedback</h1>
-        <button type="button">Good</button>
-        <button type="button">Neutral</button>
-        <button type="button">Bad</button>
+        <button type="button" onClick={() => this.onAddFeedback('good')}>
+          Good
+        </button>
+        <button type="button" onClick={() => this.onAddFeedback('neutral')}>
+          Neutral
+        </button>
+        <button type="button" onClick={() => this.onAddFeedback('bad')}>
+          Bad
+        </button>
         <h2>Statistics</h2>
         <p>Good:{this.state.good}</p>
         <p>Neutral:{this.state.neutral}</p>
