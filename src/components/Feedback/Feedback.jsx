@@ -1,4 +1,8 @@
-import { BtnBlock, Container } from './Feedback.styled';
+import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
+import { Container } from './Feedback.styled';
+import { Statistics } from 'components/Statistics/Statistics';
+import { Section } from 'components/Section/Section';
+import { Notification } from 'components/Notification/Notification';
 
 export const Feedback = ({ good, neutral, bad, onAddFeedback }) => {
   //   static PropTypes = {};
@@ -16,29 +20,25 @@ export const Feedback = ({ good, neutral, bad, onAddFeedback }) => {
 
   const total = countTotalFeedback();
   const positivePercentage = countPositiveFeedbackPercentage();
+  const options = ['good', 'neutral', 'bad'];
   return (
     <Container>
-      <h1>Please leave feedback</h1>
-      <BtnBlock>
-        <button type="button" onClick={() => onAddFeedback('good')}>
-          Good
-        </button>
-        <button type="button" onClick={() => onAddFeedback('neutral')}>
-          Neutral
-        </button>
-        <button type="button" onClick={() => onAddFeedback('bad')}>
-          Bad
-        </button>
-      </BtnBlock>
-      <h2>Statistics</h2>
-      <p>Good:{good}</p>
-      <p>Neutral:{neutral}</p>
-      <p>Bad:{bad}</p>
-      <p>Total:{total}</p>
-      <p>
-        Positive feedback:
-        {isNaN(positivePercentage) ? '0' : positivePercentage}%
-      </p>
+      <Section title="Please leave feedback">
+        <FeedbackOptions options={options} onLeaveFeedback={onAddFeedback} />
+        {total > 0 ? (
+          <Section title="Statistics">
+            <Statistics
+              good={good}
+              bad={bad}
+              neutral={neutral}
+              total={total}
+              positivePercentage={positivePercentage}
+            />
+          </Section>
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
+      </Section>
     </Container>
   );
 };
