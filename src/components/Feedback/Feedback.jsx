@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { FeedbackOptions } from 'components/FeedbackOptions/FeedbackOptions';
 import { Container } from './Feedback.styled';
 import { Statistics } from 'components/Statistics/Statistics';
@@ -5,8 +7,6 @@ import { Section } from 'components/Section/Section';
 import { Notification } from 'components/Notification/Notification';
 
 export const Feedback = ({ good, neutral, bad, onAddFeedback }) => {
-  //   static PropTypes = {};
-
   const countTotalFeedback = () => {
     const total = good + neutral + bad;
     return total;
@@ -41,4 +41,11 @@ export const Feedback = ({ good, neutral, bad, onAddFeedback }) => {
       </Section>
     </Container>
   );
+};
+
+Feedback.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  onAddFeedback: PropTypes.func.isRequired,
 };

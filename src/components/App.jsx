@@ -1,7 +1,15 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { Feedback } from './Feedback/Feedback';
 
 export class App extends Component {
+  static propTypes = {
+    good: PropTypes.number,
+    neutral: PropTypes.number,
+    bad: PropTypes.number,
+    onAddFeedback: PropTypes.func,
+  };
+
   state = {
     good: 0,
     neutral: 0,
